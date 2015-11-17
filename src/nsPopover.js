@@ -173,7 +173,6 @@
           function buttonClickHandler() {
             if ($popover.isOpen) {
               scope.hidePopover();
-              scope.$emit('nsPopover_outsideClickHandler')
             }
           }
 
@@ -338,7 +337,6 @@
 
               if (!isInPopover(e.target)) {
                 scope.hidePopover();
-                scope.$emit('nsPopover_outsideClickHandler')
               }
             }
           }
@@ -425,6 +423,7 @@
 
                 // Call the open callback
                 options.onOpen(scope);
+                scope.$emit('nsPopover_opened');
               }, delay*1000);
             },
 
@@ -510,6 +509,7 @@
           // Allow closing the popover programatically.
           scope.hidePopover = function() {
             hider_.hide(0);
+            scope.$emit('nsPopover_is_closed');
           };
 
           // Hide popovers that are associated with the passed group.

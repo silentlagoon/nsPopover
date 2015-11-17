@@ -337,6 +337,7 @@
 
               if (!isInPopover(e.target)) {
                 scope.hidePopover();
+                scope.$emit('nsPopover_outsideClickHandler')
               }
             }
           }

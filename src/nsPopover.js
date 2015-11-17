@@ -173,6 +173,7 @@
           function buttonClickHandler() {
             if ($popover.isOpen) {
               scope.hidePopover();
+              scope.$emit('nsPopover_outsideClickHandler')
             }
           }
 

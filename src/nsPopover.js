@@ -271,6 +271,9 @@
             if (placement === 'top') {
               top = rect.top - popoverRect.height;
               left = positionX();
+              if (top < 0) { // placement === 'bottom'
+                top = rect.bottom;
+              }
             } else if (placement === 'right') {
               top = positionY();
               left = rect.right;
@@ -296,6 +299,9 @@
                 left = left - (popoverRight - containerRect.width);
               }
             }
+
+            top = (top > 0) ? top : 0;
+            left = (left > 0) ? left : 0;
 
             popover
               .css('top', top.toString() + 'px')
@@ -391,7 +397,9 @@
                 }
 
                 $popover.isOpen = true;
+                $popover.css('visibility', 'hidden');
                 $popover.css('display', 'block');
+
 
                 // position the popover accordingly to the defined placement around the
                 // |elm|.
@@ -404,6 +412,7 @@
                 }
 
                 move($popover, placement_, align_, elmRect, $triangle);
+                $popover.css('visibility', '');
                 addEventListeners();
 
                 // Hide the popover without delay on the popover click events.
